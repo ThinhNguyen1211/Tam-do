@@ -1,0 +1,88 @@
+/* Design tokens. Dark (slate/indigo) is the default; light is an ink-on-paper variant. */
+
+:root {
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Lora Variable', 'Lora', Georgia, 'Times New Roman', serif;
+
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --container: 1120px;
+  --header-h: 65px; /* sticky header: 64px bar + 1px border */
+}
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b1020;
+  --bg-glow-1: rgba(99, 102, 241, 0.22);
+  --bg-glow-2: rgba(45, 212, 191, 0.08);
+  --surface: rgba(22, 28, 52, 0.62);
+  --surface-solid: #141a33;
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --border: rgba(165, 180, 252, 0.14);
+  --border-strong: rgba(165, 180, 252, 0.3);
+  --highlight: rgba(255, 255, 255, 0.07);
+  --text: #e7e9f4;
+  --text-muted: #a2a8c3;
+  --text-faint: #737a99;
+  --accent: #818cf8;
+  --accent-strong: #6366f1;
+  --accent-ink: #0b1020;
+  --accent-soft: rgba(129, 140, 248, 0.16);
+  --core: #2dd4bf;
+  --shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+
+  /* One hue per dichotomy, reused on landing cards, bars and type letters. */
+  --dim-EI: #818cf8;
+  --dim-SN: #2dd4bf;
+  --dim-TF: #f59e8b;
+  --dim-JP: #c4b5fd;
+
+  /* Cognitive function families: N, S, T, F. */
+  --fam-N: #a5b4fc;
+  --fam-S: #5eead4;
+  --fam-T: #93c5fd;
+  --fam-F: #fda4af;
+
+  --agree: #2dd4bf;
+  --disagree: #f59e8b;
+  --neutral: #8f96b3;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f5f1;
+  --bg-glow-1: rgba(99, 102, 241, 0.12);
+  --bg-glow-2: rgba(13, 148, 136, 0.07);
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-solid: #ffffff;
+  --surface-2: rgba(30, 27, 75, 0.035);
+  --border: rgba(49, 46, 129, 0.12);
+  --border-strong: rgba(49, 46, 129, 0.26);
+  --highlight: rgba(255, 255, 255, 0.9);
+  --text: #1b1e33;
+  --text-muted: #555b76;
+  --text-faint: #7c8199;
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(79, 70, 229, 0.1);
+  --core: #0d9488;
+  --shadow: 0 20px 50px -24px rgba(30, 27, 75, 0.25);
+
+  --dim-EI: #4f46e5;
+  --dim-SN: #0d9488;
+  --dim-TF: #c2410c;
+  --dim-JP: #7c3aed;
+
+  --fam-N: #4f46e5;
+  --fam-S: #0f766e;
+  --fam-T: #1d4ed8;
+  --fam-F: #be123c;
+
+  --agree: #0d9488;
+  --disagree: #c2410c;
+  --neutral: #7c8199;
+}

@@ -1,0 +1,10 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+node_modules/
+dist/
+.venv/
+.local-e2e/
+__pycache__/

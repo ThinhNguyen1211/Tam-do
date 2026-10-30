@@ -1,0 +1,209 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+/* Soft glows behind the glass surfaces; fixed so they don't scroll with content. */
+.backdrop {
+  --glows:
+    radial-gradient(60rem 40rem at 85% -10%, var(--bg-glow-1), transparent 60%),
+    radial-gradient(50rem 36rem at -10% 110%, var(--bg-glow-2), transparent 60%);
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--glows);
+}
+
+/* Light: a notebook page ruled with hand-drawn, thread-like grid lines (seamless SVG tile). */
+:root[data-theme='light'] .backdrop {
+  background:
+    var(--glows),
+    url('../assets/notebook-grid.svg') 0 0 / 192px 192px repeat;
+}
+
+/* Dark: underwater caustics. Light shafts from the "surface" drift and breathe, while a soft
+   band of light sweeps slowly up and down. Transform/opacity only, so it stays on the GPU. */
+:root:not([data-theme='light']) .backdrop::before,
+:root:not([data-theme='light']) .backdrop::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+:root:not([data-theme='light']) .backdrop::before {
+  inset: -15% -25%;
+  background: repeating-linear-gradient(
+    97deg,
+    transparent 0 60px,
+    rgba(94, 234, 212, 0.045) 85px,
+    transparent 115px 170px,
+    rgba(129, 140, 248, 0.06) 200px,
+    transparent 240px 300px,
+    rgba(165, 180, 252, 0.035) 318px,
+    transparent 340px 400px
+  );
+  -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.6) 40%, transparent 85%);
+  mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.6) 40%, transparent 85%);
+  animation:
+    caustic-drift 16s var(--ease) infinite alternate,
+    caustic-breathe 7s ease-in-out infinite alternate;
+}
+:root:not([data-theme='light']) .backdrop::after {
+  left: -10%;
+  right: -10%;
+  top: 0;
+  height: 50vh;
+  background:
+    radial-gradient(ellipse 55% 45% at 30% 50%, rgba(45, 212, 191, 0.07), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 72% 55%, rgba(129, 140, 248, 0.08), transparent 70%);
+  animation: caustic-sweep 24s ease-in-out infinite alternate;
+}
+@keyframes caustic-drift {
+  from {
+    transform: translate3d(-3%, -5%, 0);
+  }
+  to {
+    transform: translate3d(3%, 5%, 0);
+  }
+}
+@keyframes caustic-breathe {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes caustic-sweep {
+  from {
+    transform: translateY(-35vh);
+  }
+  to {
+    transform: translateY(85vh);
+  }
+}
+
+main {
+  flex: 1;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75em;
+  padding: 0.1em 0.45em;
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 24px;
+  }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 10;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.noscript {
+  text-align: center;
+  padding: 48px 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "_comment": "Content-Security-Policy for the app. Terraform (cloudfront.tf) sends it from CloudFront and `vite preview` sends it locally, so the bundle is tested under the policy it ships with. No 'unsafe-inline': the app has no inline scripts or style attributes (see public/theme-init.js and render() in src/lib/dom.js).",
+  "directives": [
+    "default-src 'self'",
+    "script-src 'self'",
+    "style-src 'self'",
+    "img-src 'self'",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "manifest-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'"
+  ]
+}
